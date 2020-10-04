@@ -1,0 +1,48 @@
+#https://www.mikrobitti.fi/neuvot/terminaalin-virittaminen-raataloi-paate-hakkerikuntoon/116f7b34-2591-4fdb-b724-97d848430493
+#rm -Rf zsh .zsh_history .tmux.conf .viminfo .tmux .zcompdump-JoukonKotikone-5.8 .zshrc source/ .zsh .dir_colors/ .oh-my-zsh/ .zcompdump .zshrc.pre-oh-my-zsh
+#chsh -s /bin/bash
+sudo apt install zsh curl git tmux fonts-powerline -y
+chsh -s /bin/zsh
+exit
+sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+#vi ~/.zshrc
+plugins=(git colored-man-pages)
+
+#vi ~/.tmux.conf
+# Muuta C-b C-a:ksi
+unbind C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix
+# Lataa asetukset uudelleen
+bind-key r source-file ~/.tmux.conf \; display-message "Tmux.conf ladattu."
+# Jaa paneelit
+bind - split-window -v
+bind _ split-window -h
+unbind %
+unbind '"'
+# Siirry paneeleissa
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+# Muuta paneelien kokoa
+bind-key -n S-Left resize-pane -L 5
+bind-key -n S-Right resize-pane -R 5
+bind-key -n S-Up resize-pane -U 5
+bind-key -n S-Down resize-pane -D 5
+# Kierrätä paneeleita
+bind-key C-o rotate-window
+# Aloita ikkunanumerot ykkösestä
+set -g base-index 1
+setw -g pane-base-index 1
+# Helpota ikkunoiden vaihtoa
+bind-key space next-window
+bind-key bspace previous-window
+bind-key enter next-layout
+
+
+
+https://blog.joaograssi.com/windows-subsystem-for-linux-with-oh-my-zsh-conemu/
+https://docs.microsoft.com/en-us/windows/terminal/tutorials/powerline-setup
+
